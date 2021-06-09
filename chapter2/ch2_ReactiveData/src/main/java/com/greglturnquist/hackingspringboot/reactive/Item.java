@@ -19,9 +19,10 @@ public class Item {
 
     private Item() {}
 
-    public Item(String name, double price) {
+    public Item(String name, double price, String description) {
         this.name = name;
         this.price = price;
+        this.description = description;
     }
 
     public String getId() {

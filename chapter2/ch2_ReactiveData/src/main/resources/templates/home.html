@@ -6,27 +6,36 @@
 </head>
 <body>
 <h2>Inventory Management</h2>
-
+<h3>Search</h3>
+<form method="get" th:action="@{'/search'}">
+  <input type="text" name="name" placeholder="name">
+  <input type="text" name="description" placeholder="description">
+  useAnd <input type="checkbox" name="useAnd" value="false">
+  <input type="submit" value="Search">
+</form>
 <table>
   <thead>
   <tr>
     <th>Id</th>
     <th>Name</th>
     <th>Price</th>
+    <th>Description</th>
   </tr>
   </thead>
   <tbody>
+  <span th:text="${items}"></span>
   <tr th:each="item:${items}">
     <td th:text="${item.id}"></td>
     <td th:text="${item.name}"></td>
     <td th:text="${item.price}"></td>
+    <td th:text="${item.description}"></td>
     <td>
       <form method="post" th:action="@{'/add/' + ${item.id}}">
         <input type="submit" value="Add to Cart" />
       </form>
     </td>
     <td>
-      <form method="delete" th:action="@{'/delete/' + ${item.id}}">
+      <form th:method="delete" th:action="@{'/delete/' + ${item.id}}">
         <input type="submit" value="Delete" />
       </form>
     </td>
@@ -35,7 +44,7 @@
 </table>
 
 <h2>My Cart</h2>
-<table>
+<table th:if="${cart != null}">
   <thead>
   <tr>
     <th>Id</th>
@@ -51,5 +60,17 @@
   </tr>
   </tbody>
 </table>
+
+<hr>
+<h2>Create Item</h2>
+<form method="post" th:action="@{'/create/'}">
+  <input type="text" name="name" placeholder="name"/>
+  <input type="text" name="price" placeholder="price" />
+  <input type="text" name="description" placeholder="description" />
+  <input type="submit" value="Create Item" />
+</form>
 </body>
+<script>
+  console.log("test");
+</script>
 </html>
